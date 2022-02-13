@@ -1296,8 +1296,9 @@ func (resp *Response) ReadBody(r *bufio.Reader, maxBodySize int) (err error) {
 
 	contentLength := resp.Header.ContentLength()
 	if contentLength >= 0 {
+		resp.Header.Add("readbody", "called")
+		resp.Header.Add("icontentlength", fmt.Sprintf("%v", contentLength))
 		bodyBuf.B, err = readBody(r, contentLength, maxBodySize, bodyBuf.B)
-
 	} else if contentLength == -1 {
 		bodyBuf.B, err = readBodyChunked(r, maxBodySize, bodyBuf.B)
 

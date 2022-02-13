@@ -1276,6 +1276,7 @@ var errorChPool sync.Pool
 // It is recommended obtaining req and resp via AcquireRequest
 // and AcquireResponse in performance-critical code.
 func (c *HostClient) Do(req *Request, resp *Response) error {
+
 	var err error
 	var retry bool
 	maxAttempts := c.MaxIdemponentCallAttempts
